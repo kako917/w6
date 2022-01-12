@@ -45,7 +45,46 @@ function delCookie()
 }
   
 
+
+function initMap() {
+      var myOptions = {
+        zoom: 15,
+        center: {lat:35.700167588780786, lng:  139.57606722665045},
+        mapTypeId: google.maps.MapTypeId.TERRAIN,
+        disableDefaultUI: true,
+        // Step 4. Customize displayed controls
+        zoomControl: true,
+        mapTypeControl: true,
+        scaleControl: true
+      }
+      var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+      // Step 2. Add custom icon
+
+      var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+
+      var marker = new google.maps.Marker({
+        position: {lat:35.700167588780786, lng:  139.57606722665045},
+        icon: iconBase + 'flag_maps.png',
+        map: map
+      });
+
+      // Step 3. Add info window
+
+      var contentString = '<div id="content"><h2 id="firstHeading" class="firstHeading">Custom info window</h2><p>井の頭公園です。<br>昔ここの弁財天様にお参りに行くと良いと言われたので選びました。</p></div>';
+
+      var infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      });
+    }
+
 </script>
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiV2ZbFIYuD3N4hzGLstSn2e4ZG5A7QlU&callback=initMap"
+    async defer></script>
 <style>
  #map_canvas {
    width: 600px;
@@ -55,8 +94,8 @@ function delCookie()
 </head>
   <h1> 課題B </h1>
 <body>
+<h2>機能１<h2>
 <div style="background-color : #CCC;">
-   <h2>機能１<h2>
    <input type="button" value="クッキー判定" onclick="checkCookie()">
   <input type="button" value="クッキー削除" onclick="delCookie()">
 </div>
@@ -67,4 +106,3 @@ function delCookie()
 </body>
 
 </html>
-  
